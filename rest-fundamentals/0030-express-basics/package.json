@@ -1,0 +1,16 @@
+{
+  "name": "0030-express-basics",
+  "version": "1.0.0",
+  "description": "Sample for mobile computing course at HTL Perg",
+  "main": "app.ts",
+  "scripts": {},
+  "author": "Rainer Stropek",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "typescript": "^3.6.3"
+  }
+}
