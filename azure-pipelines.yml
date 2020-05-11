@@ -1,0 +1,54 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  target_branch: 'gh-pages'
+
+steps:
+- checkout: self
+  persistCredentials: true
+  clean: true
+  displayName: 'Checkout'
+
+- script: |
+    git config --global user.email "rainer@software-architects.at"
+    git config --global user.name "Rainer"
+  displayName: 'Git Settings'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'Build'
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: dist
+    targetFolder: $(Agent.TempDirectory)/dist
+    cleanTargetFolder: true
+    overWrite: true
+  displayName: 'Copy dist to temp'
+
+- script: |
+    git reset --hard
+    git checkout $(target_branch)
+    rm -rf *
+  displayName: 'Switch to $(target_branch) branch'
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: $(Agent.TempDirectory)/dist
+    targetFolder: .
+    overWrite: true
+  displayName: 'Copy dist to $(target_branch) branch'
+
+- script: |
+    ls -la
+    git status
+    cat .gitignore
+    git add --all .
+    git commit -m 'Update website'
+    git push origin $(target_branch)
+  displayName: 'Git push $(target_branch) branch'
