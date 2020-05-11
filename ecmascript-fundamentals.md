@@ -108,7 +108,25 @@ for (let value of iterable) {
 ## "Callback hell"
 
 ```
-<!--#include file="ecmascript-fundamentals/0010-promise/callback.js" -->
+function slowDiv(x, y, resultCallback) {
+  if (!y) {
+    callback('Div by zero', null);
+  } else {
+    // Simulate long-running calculation by waiting 25ms
+    setTimeout(() => resultCallback(null, x / y), 25);
+  }
+}
+
+// Calculate 10 / 5 + 20 / 10 without printing errors
+slowDiv(10, 5, (err, res1) => {
+  if (!err) {
+    slowDiv(20, 10, (err, res2) => {
+      if (!err) {
+        console.log(res1 + res2);
+      }
+    });
+  }
+})
 ```
 
 
@@ -116,7 +134,22 @@ for (let value of iterable) {
 ## Promises
 
 ```
-<!--#include file="ecmascript-fundamentals/0010-promise/promise.js" -->
+function slowDiv(x, y) {
+  return new Promise((resolve, reject) => {
+    if (!y) {
+      reject('Div by zero');
+    } else {
+      // Simulate long-running calculation by waiting 25ms
+      setTimeout(() => resolve(x / y), 25);
+    }
+  });
+}
+
+// Calculate 10 / 5 + 20 / 10 without printing errors
+slowDiv(10, 5)
+  .then(res1 => slowDiv(20, 10)
+  .then(res2 => console.log(res1 + res2)))
+  .finally(() => console.log('done')); // since ES2018
 ```
 
 
@@ -137,7 +170,17 @@ for (let value of iterable) {
 * See also [*Rest parameters*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
 
 ```
-<!--#include file="ecmascript-fundamentals/0005-trailing-comma/app.js" -->
+function sum(...theArgs) {
+    return theArgs.reduce((previous, current) => previous + current);
+}
+
+const result = sum(1 * 2 ** 5,
+    0 * 2 ** 4,
+    1 * 2 ** 3,
+    0 * 2 ** 2,
+    1 * 2 ** 1,
+    0 * 2 ** 0,);
+console.log(result);
 ```
 
 
@@ -147,7 +190,23 @@ for (let value of iterable) {
 * [Async functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) with `async/await` similar to C# (will be covered later in more details)
 
 ```
-<!--#include file="ecmascript-fundamentals/0020-async/async.js" -->
+function slowDiv(x, y) {
+  return new Promise((resolve, reject) => {
+    if (!y) {
+      reject('Div by zero');
+    } else {
+      // Simulate long-running calculation by waiting 25ms
+      setTimeout(() => resolve(x / y), 25);
+    }
+  });
+}
+
+async function run() {
+  // Calculate 10 / 5 + 20 / 10 without printing errors
+  console.log(await slowDiv(10, 5) + await slowDiv(20, 10));
+}
+
+run();
 ```
 
 
@@ -158,7 +217,26 @@ for (let value of iterable) {
 * Also note use of [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator)
 
 ```
-<!--#include file="ecmascript-fundamentals/0025-async-iterable/app.js" -->
+function delay(ms) {
+    return new Promise((res) => { setTimeout(() => res(), ms); });
+}
+
+const asyncIterable = {
+    async*[Symbol.asyncIterator]() {
+        for (let i = 0; i < 42; i++) {
+            await delay(100);
+            yield 1;
+        }
+    }
+};
+
+(async () => {
+    let result = 0;
+    for await (let num of asyncIterable) {
+        result += num;
+        console.log(`Running sum: ${result}`);
+    }
+})();
 ```
 
 

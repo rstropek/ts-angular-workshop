@@ -125,7 +125,23 @@ export class MyComponent {
 ## Consuming Web APIs
 
 ```
-<!--#include file="angular/0020-http-client/app.component.ts" -->
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+interface IPerson { name: string; }
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
+})
+export class AppComponent  {
+  public people: Observable<IPerson[]>;
+  constructor(private httpClient: HttpClient) { 
+    this.people = httpClient.get<IPerson[]>('http://localhost:8080/api/people');
+  }
+}
 ```
 
 
@@ -133,7 +149,11 @@ export class MyComponent {
 ## Consuming Web APIs
 
 ```
-<!--#include file="angular/0020-http-client/app.component.html" -->
+<h1>People</h1>
+
+<ul>
+  <li *ngFor="let person of people | async">{{ person.name }}</li>
+</ul>
 ```
 
 
@@ -168,7 +188,24 @@ export class MyComponent {
 ## Setup *Routing Module*
 
 ```
-<!--#include file="angular/0040-routing/src/app/app-routing.module.ts" -->
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {CustomerDetailsComponent} from './customer-details.component';
+import {CustomerListComponent} from './customer-list.component';
+import {WelcomeComponent} from './welcome.component';
+
+const routes: Routes = [
+  {path: 'welcome', component: WelcomeComponent},
+  {path: 'customers', component: CustomerListComponent},
+  {path: 'customers/:id', component: CustomerDetailsComponent},
+  {path: '', redirectTo: '/welcome', pathMatch: 'full'}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)], 
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
 ```
 
 
@@ -176,7 +213,26 @@ export class MyComponent {
 ## Add *Routing Module* to Main Module
 
 ```
-<!--#include file="angular/0040-routing/src/app/app.module.ts" -->
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {CustomerDetailsComponent} from './customer-details.component';
+import {CustomerListComponent} from './customer-list.component';
+import {WelcomeComponent} from './welcome.component';
+
+@NgModule({
+  declarations: [
+    AppComponent, WelcomeComponent, CustomerListComponent,
+    CustomerDetailsComponent
+  ],
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}
 ```
 
 
@@ -184,7 +240,21 @@ export class MyComponent {
 ## Router Links
 
 ```
-<!--#include file="angular/0040-routing/src/app/welcome.component.ts" -->
+import {Component, OnInit} from '@angular/core';
+
+@Component({
+  selector: 'app-welcome',
+  template: `
+    <h2>Welcome</h2>
+    <ul>
+      <li><a routerLink="/customers">Customer List</a></li>
+      <li><a routerLink="/customers/123">Details about customer 123</a></li>
+    </ul>`
+})
+export class WelcomeComponent implements OnInit {
+  constructor() {}
+  ngOnInit() {}
+}
 ```
 
 
@@ -192,7 +262,25 @@ export class MyComponent {
 ## Processing Route Parameters
 
 ```
-<!--#include file="angular/0040-routing/src/app/customer-details.component.ts" -->
+import 'rxjs/Rx';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Observable} from 'rxjs/Rx';
+
+@Component({
+  selector: 'app-customer-details',
+  template: `<h2>Customer Details for Customer {{ customerID | async }}</h2>
+  <ul>
+    <li><a routerLink="/welcome">Welcome</a></li>
+    <li><a routerLink="/customers/123">Details about customer 123</a></li>
+    <li><a routerLink="/customers/456">Details about customer 456</a></li>
+  </ul>`
+})
+export class CustomerDetailsComponent implements OnInit {
+  public customerID: Observable<string>;
+  constructor(private route: ActivatedRoute) { console.log('Created...'); }
+  ngOnInit() { this.customerID = this.route.paramMap.map(param => param.get('id')); }
+}
 ```
 
 
@@ -228,7 +316,26 @@ export class MyComponent {
 ## Flex Layout
 
 ```
-<!--#include file="angular/0050-ng-flex/src/app/simple-layouts/simple-layouts.component.html" -->
+<h2>Static Layout</h2>
+<div fxLayout="row">
+    <button>E1</button><button>E2</button><button>E3</button>
+</div>
+
+<h2>Data Binding</h2>
+<button (click)="rowColumnLayout = rowColumnLayout == 'column' ? 'row' : 'column'">
+    Switch layout</button>
+<div [fxLayout]="rowColumnLayout">
+    <button>E1</button><button>E2</button><button>E3</button>
+</div>
+
+<h2>Nested Layout</h2>
+<div fxLayout="column">
+    <button>E1</button>
+    <div fxLayout="row">
+        <button fxFlex="100px">E2.1</button><button fxFlex="grow">E2.2</button>
+    </div>
+    <button>E3</button>
+</div>
 ```
 
 
@@ -236,7 +343,22 @@ export class MyComponent {
 ## Flex Layout
 
 ```
-<!--#include file="angular/0050-ng-flex/src/app/ordering/ordering.component.html" -->
+<h1>Ordering</h1>
+
+<h2>Static Ordering</h2>
+<div fxLayout="row">
+    <button fxFlexOrder="1">Element 1</button>
+    <button fxFlexOrder="3">Element 3</button>
+    <button fxFlexOrder="2">Element 2</button>
+</div>
+
+<h2>Data Binding</h2>
+<button (click)="element3Order = element3Order == 30 ? 15 : 30">Switch order</button>
+<div fxLayout="row">
+    <button fxFlexOrder="10">Element 1</button>
+    <button [fxFlexOrder]="element3Order">Element 3</button>
+    <button fxFlexOrder="20">Element 2</button>
+</div>
 ```
 
 

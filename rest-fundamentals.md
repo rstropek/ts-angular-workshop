@@ -37,11 +37,28 @@ Introduction to [REST](https://en.wikipedia.org/wiki/Representational_state_tran
 ## Sample Requests
 
 ```
-<!--#include file="rest-fundamentals/0010-rest-clients/pokeapi.http" -->
+GET https://pokeapi.co/api/v2/pokemon HTTP/1.1
+Accept: application/json
+
+###
+
+GET https://pokeapi.co/api/v2/pokemon/1/ HTTP/1.1
+Accept: application/json
 ```
 
 ```
-<!--#include file="rest-fundamentals/0010-rest-clients/northwind.http" -->
+GET http://services.odata.org/V4/Northwind/Northwind.svc/Customers HTTP/1.1
+Accept: application/json
+
+###
+
+GET http://services.odata.org/V4/Northwind/Northwind.svc/Customers HTTP/1.1
+Accept: application/atom+xml
+
+###
+
+GET http://services.odata.org/V4/Northwind/Northwind.svc/Customers?$filter=Country%20eq%20%27Germany%27 HTTP/1.1
+Accept: application/json
 ```
 Exercise: Try this sample with different REST clients
 
@@ -50,7 +67,14 @@ Exercise: Try this sample with different REST clients
 ## Sample Requests (cont.)
 
 ```
-<!--#include file="rest-fundamentals/0010-rest-clients/post.http" -->
+POST https://httpbin.org/post HTTP/1.1
+Content-Type: application/json
+
+{ "Foo": "Bar", "Answer": 42 }
+
+###
+
+DELETE https://httpbin.org/delete HTTP/1.1
 ```
 Exercise: Try this sample with different REST clients
 
@@ -79,7 +103,20 @@ Exercise: Try this sample with different REST clients
   * [Detailed MDN documentation about *fetch*...](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)
 
 ```
-<!--#include file="rest-fundamentals/0020-rest-client/app-promise.js" -->
+const pokemonList = document.getElementById('pokemons');
+
+(function() {
+fetch('https://pokeapi.co/api/v2/pokemon/').then(response => {
+  response.json().then(pokelist => {
+    let html = '';
+    for (const pokemon of pokelist.results) {
+      html += `<li>${pokemon.name}</li>`
+    }
+
+    pokemonList.innerHTML = html;
+  });
+});
+})();
 ```
 
 
@@ -89,7 +126,19 @@ Exercise: Try this sample with different REST clients
 With `async/await`:
 
 ```
-<!--#include file="rest-fundamentals/0020-rest-client/app.js" -->
+const pokemonList = document.getElementById('pokemons');
+
+(async function() {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
+    const pokelist = await response.json();
+
+    let html = '';
+    for(const pokemon of pokelist.results) {
+        html += `<li>${pokemon.name}</li>`
+    }
+
+    pokemonList.innerHTML = html;
+})();
 ```
 
 
@@ -99,7 +148,16 @@ With `async/await`:
 With [*jQuery*](http://api.jquery.com/jQuery.get/):
 
 ```
-<!--#include file="rest-fundamentals/0020-rest-client/app-jquery.js" -->
+(async function() {
+    const pokelist = await $.get('https://pokeapi.co/api/v2/pokemon/');
+
+    let html = '';
+    for(const pokemon of pokelist.results) {
+        html += `<li>${pokemon.name}</li>`
+    }
+
+    $('#pokemons')[0].innerHTML = html;
+})();
 ```
 
 
@@ -120,11 +178,24 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## RESTful Web API with [*Express.js*](http://expressjs.com/)
 
 ```
-<!--#include file="rest-fundamentals/0030-express-basics/app.ts" -->
+// If you have problems with the following line, try:
+// import express = require('express');
+import * as express from 'express';
+
+var server = express();
+server.get('/api/echo/:word', (request, response) => {
+    response.send({youSent: request.params.word});
+});
+
+const port = 8080;
+server.listen(port, function() {
+  console.log(`API is listening on port ${port}`);
+});
 ```
 
 ```
-<!--#include file="rest-fundamentals/0030-express-basics/request.http" -->
+GET http://localhost:8080/api/echo/Foo-Bar HTTP/1.1
+Accept: application/json
 ```
 
 
@@ -152,7 +223,25 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## [*Express.js*](http://expressjs.com/) Examples
 
 ```
-<!--#include file="rest-fundamentals/0040-express-verbs/app.ts" -->
+// If you have problems with the following line, try:
+// import express = require('express');
+import * as express from 'express';
+
+import {deleteSingle} from './delete-single';
+import {getAll} from './get-all';
+import {getSingle} from './get-single';
+import {post} from './post';
+
+const app = express();
+app.use(express.json());
+
+// Add routes
+app.get('/api/customers', getAll);
+app.post('/api/customers', post);
+app.get('/api/customers/:id', getSingle);
+app.delete('/api/customers/:id', deleteSingle);
+
+app.listen(8080, () => console.log('API is listening on port 8080'));
 ```
 
 
@@ -160,11 +249,27 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## [*Express.js*](http://expressjs.com/) Examples (cont.)
 
 ```
-<!--#include file="rest-fundamentals/0040-express-verbs/data.ts" -->
+export interface ICustomer {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
+
+export const customers: ICustomer[] = [
+  {id: 1, firstName: 'Donald', lastName: 'Duck'},
+  {id: 2, firstName: 'Mickey', lastName: 'Mouse'},
+  {id: 3, firstName: 'Minnie', lastName: 'Mouse'},
+  {id: 4, firstName: 'Scrooge', lastName: 'McDuck'}
+];
 ```
 
 ```
-<!--#include file="rest-fundamentals/0040-express-verbs/get-all.ts" -->
+import {Request, Response} from 'express';
+import {customers} from './data';
+
+export function getAll(req: Request, res: Response): void {
+    res.send(customers);
+}
 ```
 
 
@@ -172,7 +277,23 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## [*Express.js*](http://expressjs.com/) Examples (cont.)
 
 ```
-<!--#include file="rest-fundamentals/0040-express-verbs/get-single.ts" -->
+import {Request, Response} from 'express';
+import {NOT_FOUND, BAD_REQUEST} from 'http-status-codes';
+import {customers} from './data';
+
+export function getSingle(req: Request, res: Response): void {
+  const id = parseInt(req.params.id);
+  if (id) {
+    const customer = customers.find(c => c.id === id);
+    if (customer) {
+      res.send(customer);
+    } else {
+      res.status(NOT_FOUND).send();
+    }
+  } else {
+    res.status(BAD_REQUEST).send('Parameter id must be a number');
+  }
+}
 ```
 
 
@@ -180,7 +301,25 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## [*Express.js*](http://expressjs.com/) Examples (cont.)
 
 ```
-<!--#include file="rest-fundamentals/0040-express-verbs/post.ts" -->
+import {CREATED, BAD_REQUEST} from 'http-status-codes';
+import {Request, Response} from 'express';
+import {customers, ICustomer} from './data';
+
+export function post(req: Request, res: Response): void {
+  if (!req.body.id || !req.body.firstName || !req.body.lastName) {
+    res.status(BAD_REQUEST).send('Missing mandatory member(s)');
+  } else {
+    const newCustomerId = parseInt(req.body.id);
+    if (!newCustomerId) {
+      res.status(BAD_REQUEST).send('ID has to be a numeric value');
+    } else {
+      const newCustomer: ICustomer = { id: newCustomerId,
+        firstName: req.body.firstName, lastName: req.body.lastName };
+      customers.push(newCustomer);
+      res.status(CREATED).header({Location: `${req.path}/${req.body.id}`}).send(newCustomer);
+    }
+  }
+}
 ```
 
 
@@ -188,7 +327,24 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## [*Express.js*](http://expressjs.com/) Examples (cont.)
 
 ```
-<!--#include file="rest-fundamentals/0040-express-verbs/delete-single.ts" -->
+import {NO_CONTENT, NOT_FOUND, BAD_REQUEST} from 'http-status-codes';
+import {Request, Response} from 'express';
+import {customers} from './data';
+
+export function deleteSingle(req: Request, res: Response): void {
+  const id = parseInt(req.params.id);
+  if (id) {
+    const customerIndex = customers.findIndex(c => c.id === id);
+    if (customerIndex !== (-1)) {
+      customers.splice(customerIndex, 1);
+      res.status(NO_CONTENT).send();
+    } else {
+      res.status(NOT_FOUND).send();
+    }
+  } else {
+    res.status(BAD_REQUEST).send('Parameter id must be a number');
+  }
+}
 ```
 
 
@@ -244,7 +400,24 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## [*Express.js*](http://expressjs.com/) Server-Side Rendering
 
 ```
-<!--#include file="rest-fundamentals/0060-express-server-side-html/src/app.ts" -->
+import * as path from 'path';
+import * as express from 'express';
+
+const app = express();
+
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, '/views'));
+
+app.get('/', function(req, res) {
+  res.render('index', {
+    title: 'Hey',
+    message: 'Hello there!',
+    todos: [ { id: 1, desc: 'Buy food' }, { id: 2, desc: 'Homework' },
+      { id: 3, desc: 'Play video games' } ]
+  });
+});
+
+app.listen(8080, () => console.log('API is listening on port 8080'));
 ```
 
 
@@ -252,7 +425,26 @@ With [*jQuery*](http://api.jquery.com/jQuery.get/):
 ## [*Express.js*](http://expressjs.com/) Server-Side Rendering (cont.)
 
 ```
-<!--#include file="rest-fundamentals/0060-express-server-side-html/src/views/index.hbs" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ message }}</h1>
+    {{#if todos}}
+    <ul>
+        {{#each todos}}
+        <li>{{desc}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>No todos</p>
+    {{/if}}
+</body>
+</html>
 ```
 
 

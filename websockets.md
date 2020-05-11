@@ -61,7 +61,20 @@ Introduction to [Websockets](https://en.wikipedia.org/wiki/WebSocket)
 ## Simple Websockets Server with [ws](https://github.com/websockets/ws)
 
 ```
-<!--#include file="websockets/0010-ws-intro/simple-server.ts" -->
+import * as WebSocket from 'ws';
+
+// Create WebSockets server listening on port 3000
+const wss = new WebSocket.Server({port: 3000});
+
+wss.on('connection', ws => {
+  // Called whenever a new client connects
+
+  // Add handler for incoming messages
+  ws.on('message', message => console.log('received: %s', message));
+
+  // Send text message to new client
+  ws.send('Welcome!');
+});
 ```
 
 * Try it with e.g. [Simple Websockets Client](https://github.com/hakobera/Simple-WebSocket-Client)
@@ -71,7 +84,22 @@ Introduction to [Websockets](https://en.wikipedia.org/wiki/WebSocket)
 ## Broadcast with [ws](https://github.com/websockets/ws)
 
 ```
-<!--#include file="websockets/0010-ws-intro/timer-broadcast.ts" -->
+import * as WebSocket from 'ws';
+import { setInterval } from 'timers';
+
+// Create WebSockets server listening on port 3000
+const wss = new WebSocket.Server({port: 3000});
+
+function broadcast(data: string) {
+  // Iterate over all clients
+  wss.clients.forEach(client => {
+    // Send if connection is open
+    if (client.readyState === WebSocket.OPEN) client.send(data);
+  });
+}
+
+let i = 0;
+setInterval(() => broadcast((i++).toString()), 1000);
 ```
 
 
@@ -79,7 +107,21 @@ Introduction to [Websockets](https://en.wikipedia.org/wiki/WebSocket)
 ## *Socket.io* Server
 
 ```
-<!--#include file="websockets/0020-sio-intro/server.ts" -->
+import * as express from 'express';
+import * as http from 'http';
+import * as sio from 'socket.io';
+
+const app = express();
+app.use(express.static(__dirname + '/public'));
+const server = http.createServer(app);
+server.listen(3000);
+
+sio(server).on('connection', function(socket) {
+  socket.on('message', function(message) {
+    socket.emit('greet', `echo ${message}`);
+  });
+  socket.emit('greet', 'Welcome!');
+});
 ```
 
 
@@ -87,7 +129,20 @@ Introduction to [Websockets](https://en.wikipedia.org/wiki/WebSocket)
 ## *Socket.io* HTML
 
 ```
-<!--#include file="websockets/0020-sio-intro/public/index.html" -->
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Socket IO</title>
+</head>
+
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main.js"></script>
+</body>
+
+</html>
 ```
 
 
@@ -95,7 +150,13 @@ Introduction to [Websockets](https://en.wikipedia.org/wiki/WebSocket)
 ## *Socket.io* Client
 
 ```
-<!--#include file="websockets/0020-sio-intro/public/main.ts" -->
+declare const io: any; // This object will be provided by Socket.io
+
+const socket: SocketIO.Server = io();
+socket.on('greet', function(message) {
+  console.log(`Received: ${message}`);
+});
+socket.emit('message', 'Hello World!');
 ```
 
 

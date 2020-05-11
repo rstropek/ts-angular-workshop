@@ -1,4 +1,0 @@
-*.js
-*.js.map
-package-lock.json
-!gulpfile.js
