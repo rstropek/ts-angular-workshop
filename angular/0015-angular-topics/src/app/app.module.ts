@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BasicsModule } from './basics/basics.module';
 import { DirectivesModule } from './directives/directives.module';
 import { DependencyInjectionModule } from './dependency-injection/dependency-injection.module';
+import { FormsDemoModule } from './forms-demo/forms-demo.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DependencyInjectionModule } from './dependency-injection/dependency-inj
     BasicsModule,
     DirectivesModule,
     AppRoutingModule,
-    DependencyInjectionModule
+    DependencyInjectionModule,
+    FormsDemoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
