@@ -4,7 +4,7 @@
 
 We already worked on [examples using the PokeAPI](https://github.com/rstropek/ts-angular-workshop/tree/master/rest-fundamentals/9040-pokelist) in this year, can you remember? This time we are going to use this public Web API again.
 
-You have to create an Angular 7 app that uses the Angular router. **Note** that it is highly recommended to complete this homework because it is similar to the example in the upcoming exam.
+You have to create an Angular app that uses the Angular router.
 
 ## Requirements
 
@@ -20,12 +20,3 @@ You have to create an Angular 7 app that uses the Angular router. **Note** that 
 
 * Display the *name of the pokemon* and its *ability names* on the details page.
 
-## Technical Requirements
-
-* Use Angular 7
-
-* You can use Stackblitz or a locally created Angular solution. **Note** that a locally created Angular solution is recommended in order to prepare for the upcoming exam.
-
-## Extra Point
-
-Send me a link to the working application deployed on the internet via a GitHub issue to earn an extra point for your grade.

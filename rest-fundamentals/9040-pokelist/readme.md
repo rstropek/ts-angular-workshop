@@ -3,15 +3,9 @@
 
 ## Introduction
 
-In this exercise, you have to implement a website that uses a RESTful Web API in the background. You have to create the website from scratch without any initial templates to build on. Feel free to use prior homeworks or samples from the course material as a starting point.
+In this exercise, you have to implement a website that uses a RESTful Web API in the background. You have to create the website from scratch without any initial templates to build on.
 
 Your website has to display a list of *Pokemons* from the [*pokeapi*](https://pokeapi.co/). Add a *Details* button for each Pokemon that shows details about the figure. You find the detailed specification below.
-
-1. Everybody has to do his/her best to come up with a solution.
-
-1. Earn one point for your grade...
-   1. ...if you create an *GitHub Issue* in your *GitHub Classroom* containing a link to the website that I can test over the Internet **and**
-   1. ...if you format your website using the [Bootstrap CSS Framework](https://getbootstrap.com/).
 
 
 ## Specification

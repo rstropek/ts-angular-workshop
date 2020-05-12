@@ -4,8 +4,6 @@
 
 In this exercise you have to implement a user interface for a ToDo-List application. You have to use Angular to implement it.
 
-Everybody has to submit her or his best try via GitHub.
-
 ## Web API
 
 The backend Web API has been prepared for you. You can find it in [*0010-demo-api*](https://github.com/rstropek/ts-angular-workshop/tree/master/angular/0010-demo-api). Take particular note of [*demo.http*](https://github.com/rstropek/ts-angular-workshop/blob/master/angular/0010-demo-api/demo.http). It contains sample HTTP requests demonstrating how you can:
@@ -39,13 +37,11 @@ Feel free to extend the existing code if you need to. However, for solving this 
 
 1. As a user, I want to be able to delete an existing todo item.
 
-## Advanced Exercises for Extra Points
+## Advanced Exercises
 
 ### Angular Material
 
 [*Angular Material*](https://material.angular.io/) is a great framework to build mobile web apps. Read the [getting started guide](https://material.angular.io/guide/getting-started) and try to apply it to your app. Use e.g. [lists](https://material.angular.io/components/list/overview) and/or [cards](https://material.angular.io/components/card/overview) for todo items. Use [inputs](https://material.angular.io/components/input/overview), [autocomplete](https://material.angular.io/components/autocomplete/overview), and/or [checkboxes](https://material.angular.io/components/checkbox/overview) for the todo form.
-
-Send me a link to your solution styled with *Angular Material* via a GitHub issue and you will get an extra point for your grade.
 
 ### Due Date
 
@@ -54,5 +50,3 @@ Handling date values is not trivial in web applications. If you want an extra ch
 1. You have to extend the web api accordingly.
 
 1. Use [*Angular Material*'s datepicker](https://material.angular.io/components/datepicker/overview) in the todo form.
-
-Send me a link to your solution thaat includes a working due date via a GitHub issue and you will get an extra point for your grade.

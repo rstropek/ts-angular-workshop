@@ -17,10 +17,6 @@ In this exercise you have to implement a tool for the mathematical exercise [*Tu
 
 <img src="error-message.png" width="50%" />
 
-## Extra point
-
-You can earn an **extra point** for your grade by creating the solution using [StackBlitz](https://stackblitz.com) and sending me a link to it using a GitHub issue.
-
 ## Solution
 
 You can find a sample solution (deliberately without comments) in [*app.component.ts*](app.component.ts), [*app.component.html*](app.component.html) and [*app.component.css*](app.component.css). You can try it live on [StackBlitz](https://stackblitz.com/edit/angular-efz4je). However, before you take a look at it, try to find your own solution!

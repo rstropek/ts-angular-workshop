@@ -1,0 +1,26 @@
+<h3>Template Demo</h3>
+<p>
+    This demo introduces things you can do in templates. For details see
+    <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html" target="_blank">Angular documentation</a>.
+</p>
+<ul>
+    <li>Interpolation: {{ isAngularCool }}</li>
+    <li>One way (component to view): <button [disabled]="angularIsCool">Add scope</button></li>
+    <li>
+        One way to directive property:
+        <span [ngClass]="{'text-danger': angularIsCool}" style="padding: 5px;">Angular is cool</span>
+    </li>
+    <li>Event binding: <button (click)="sayIt()">Say it</button></li>
+    <li>
+        Two-way binding:
+        <input type="text" [(ngModel)]="message" />&nbsp;
+        {{ message }}
+    </li>
+    <li>Class: <span [class.text-danger]="angularIsCool">Angular Rulez</span></li>
+    <li>Style: <span [style.color]="angularIsCool ? 'blue' : 'red'">Angular forever</span></li>
+    <li>
+        Reference variables:
+        <input type="text" #messageField value="I think, Angular is cool">
+        <span (click)="sayIt(messageField.value)">&nbsp;Say it</span>
+    </li>
+</ul>

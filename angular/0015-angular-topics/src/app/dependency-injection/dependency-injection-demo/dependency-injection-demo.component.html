@@ -1,0 +1,11 @@
+<h3>Demo for Dependency Injection</h3>
+<p>
+    Note that you have to open your dev tool's console window in order
+    to see the output of the button below.
+</p>
+<button class='btn' (click)="sender.SendMessage('Foo Bar', 'Hi')">
+    Send Message
+</button>
+<button class='btn' (click)="SendWithRuntimeInjection('Foo Bar', 'Hi')">
+    Send Message with Runtime Injection
+</button>
