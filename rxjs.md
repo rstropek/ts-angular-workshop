@@ -73,3 +73,11 @@ Introduction to [RxJS](https://rxjs-dev.firebaseapp.com/)
 ```js
 <!--#include file="angular/0030-rxjs/mapping.ts" -->
 ```
+
+
+<!-- .slide: class="left" -->
+## More Complex Auto-Search Sample
+
+```js
+<!--#include file="angular/0030-rxjs/auto-search.ts" -->
+```

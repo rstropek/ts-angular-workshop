@@ -7,6 +7,7 @@ import { domEvents } from './dom-events';
 import { pipelines } from './pipelines';
 import { combine } from './combining';
 import { flatMapping } from './mapping';
+import { autoSearch } from './auto-search';
 
 // The basics
 // manualObservable();
@@ -21,5 +22,6 @@ import { flatMapping } from './mapping';
 // pipelines();
 
 // Combining observables
-combine();
-flatMapping();
+// combine();
+// flatMapping();
+autoSearch();
