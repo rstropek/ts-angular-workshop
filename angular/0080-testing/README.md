@@ -12,11 +12,9 @@ The existing code in this application can be started, but it doesn't contain the
 
 Your Job is to analyze the unit tests and add the necessary logic based on the test cases that you could find. The goal is that you become more familiar with *Jasmine* tests.
 
-## Extra Points
-
-* Earn one extra point if you check in your solution and send me a GitHub issue *with a screenshot* of your tests that are *all green*.
-* Earn a second extra point if you add at least one additional test that makes sense. Mention the test that you wrote in a GitHub issue so that I know where to look at.
 
 ## Extra Challenge
 
-Want to have an extra challenge? Try to add at least one additional *DOM Test* (see [*app.component.spec.ts*](src/app/app.component.spec.ts)) that makes sense. This challenge is optional and just for fun, you don't get extra points for it.
+Looking for an extra challenge? Add at least one additional test that makes sense.
+
+Try to add at least one additional *DOM Test* (see [*app.component.spec.ts*](src/app/app.component.spec.ts)) that makes sense.

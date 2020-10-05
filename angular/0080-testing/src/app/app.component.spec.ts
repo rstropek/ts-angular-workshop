@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { InvoiceCalculatorService, InvoiceLine, Invoice, InvoiceLineComplete } from './invoice-calculator.service';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +23,7 @@ class InvoiceCalculatorServiceMock {
 }
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule
