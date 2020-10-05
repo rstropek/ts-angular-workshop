@@ -39,7 +39,7 @@ ng serve
 
 * [StackBlitz](https://stackblitz.com/)
 * Online *Visual Studio Code* IDE for Angular (and React)
-* Consider für VSCode:
+* Consider for VSCode:
   * [*Nx Console* extension](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
   * [*Angular Essentials* extension](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
   * [*Live Share* extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)

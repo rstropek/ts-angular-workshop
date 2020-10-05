@@ -22,8 +22,8 @@ Introduction to [Angular Routing](https://angular.io/guide/router)
 ## Setup *Routing Module*
 
 ```
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import {CustomerDetailsComponent} from './customer-details.component';
 import {CustomerListComponent} from './customer-list.component';
 import {WelcomeComponent} from './welcome.component';
@@ -36,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)], 
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
@@ -47,11 +47,11 @@ export class AppRoutingModule { }
 ## Add *Routing Module* to Main Module
 
 ```
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import {CustomerDetailsComponent} from './customer-details.component';
 import {CustomerListComponent} from './customer-list.component';
 import {WelcomeComponent} from './welcome.component';
@@ -61,12 +61,14 @@ import {WelcomeComponent} from './welcome.component';
     AppComponent, WelcomeComponent, CustomerListComponent,
     CustomerDetailsComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
 ```
 
 
@@ -96,10 +98,10 @@ export class WelcomeComponent implements OnInit {
 ## Processing Route Parameters
 
 ```
-import 'rxjs/Rx';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer-details',
@@ -113,7 +115,7 @@ import {Observable} from 'rxjs/Rx';
 export class CustomerDetailsComponent implements OnInit {
   public customerID: Observable<string>;
   constructor(private route: ActivatedRoute) { console.log('Created...'); }
-  ngOnInit() { this.customerID = this.route.paramMap.map(param => param.get('id')); }
+  ngOnInit() { this.customerID = this.route.paramMap.pipe(map(param => param.get('id'))); }
 }
 ```
 
