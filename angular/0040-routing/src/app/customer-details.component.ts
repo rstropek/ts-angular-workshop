@@ -1,7 +1,7 @@
-import 'rxjs/Rx';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer-details',
@@ -15,5 +15,5 @@ import {Observable} from 'rxjs/Rx';
 export class CustomerDetailsComponent implements OnInit {
   public customerID: Observable<string>;
   constructor(private route: ActivatedRoute) { console.log('Created...'); }
-  ngOnInit() { this.customerID = this.route.paramMap.map(param => param.get('id')); }
+  ngOnInit() { this.customerID = this.route.paramMap.pipe(map(param => param.get('id'))); }
 }
