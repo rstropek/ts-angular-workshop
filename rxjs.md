@@ -170,11 +170,11 @@ export function combine() {
 
 ```js
 import { from, of } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 export function flatMapping() {
     const webApiResponse = of(["Foo", "Bar"]);
-    const resultArray = webApiResponse.pipe(flatMap(v => from(v)));
+    const resultArray = webApiResponse.pipe(mergeMap(v => from(v)));
     resultArray.subscribe(v => console.log(v));
 }
 ```
@@ -185,7 +185,7 @@ export function flatMapping() {
 
 ```js
 import { Observable, of, merge } from 'rxjs';
-import { delay, debounceTime, switchMap, flatMap, tap } from 'rxjs/operators';
+import { delay, debounceTime, switchMap, tap, mergeMap } from 'rxjs/operators';
 
 export function autoSearch() {
     const data = ['Tom', 'Tim', 'Timothy', 'John', 'James'];
@@ -220,7 +220,7 @@ export function autoSearch() {
         debounceTime(200),
         tap(v => console.log(`Querying API for ${v}`)),
         switchMap(filter => get(filter)),
-        flatMap(r => r)
+        mergeMap(r => r)
     ).subscribe(v => console.log(v));
 }
 ```
