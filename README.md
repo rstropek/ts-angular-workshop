@@ -1,6 +1,6 @@
 # TypeScript and Angular Workshop
 
-This repository contains material for the TypeScript and Angular Workshop of [Rainer Stropek](https://rainerstropek.me).
+This repository contains material for the TypeScript and Angular Workshops.
 
 ## View Material
 
