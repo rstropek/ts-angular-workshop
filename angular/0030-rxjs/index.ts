@@ -24,4 +24,4 @@ import { autoSearch } from './auto-search';
 // Combining observables
 // combine();
 // flatMapping();
-autoSearch();
+// autoSearch();
