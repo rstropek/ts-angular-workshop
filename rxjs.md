@@ -109,7 +109,7 @@ import { fromEvent } from 'rxjs';
 
 export function domEvents() {
     let counter = 0;
-    const button = document.querySelector("button");
+    const button = document.querySelector("button")!;
     fromEvent(button, "click")
         .subscribe(() => console.log(`Clicked button ${++counter} times...`));
 }
@@ -133,7 +133,7 @@ export function pipelines() {
     const myMap = pipe(map<number, number>(n => n ** 2), take(3));
     interval(500).pipe(myMap).subscribe(v => console.log(v));
 
-    const button = document.querySelector("button");
+    const button = document.querySelector("button")!;
     fromEvent(button, "click")
         .pipe(debounceTime(250), take(5))
         .subscribe(v => console.log('clicked'));
