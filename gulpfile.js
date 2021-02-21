@@ -11,12 +11,12 @@ function clean() {
 function copyReveal() {
   const rbase = 'node_modules/reveal.js';
   return src(
-          [
-            path.join(rbase, 'css/**/*.css'), path.join(rbase, 'js/**/*.js'),
-            path.join(rbase, 'lib/**/*'), path.join(rbase, 'plugin/**/*')
-          ],
-          {base: rbase})
-      .pipe(dest('dist'));
+      [
+        path.join(rbase, 'dist/**/*'), path.join(rbase, 'js/**/*.js'),
+        path.join(rbase, 'lib/**/*'), path.join(rbase, 'plugin/**/*')
+      ],
+      { base: rbase })
+    .pipe(dest('dist'));
 }
 
 function copyJquery() {
@@ -51,9 +51,9 @@ const defaultTasks = series(parallel(copyHtml, copyCss, copyHeaders, copyImages,
 exports.clean = clean;
 exports.default = defaultTasks;
 
-exports.watch = function() {
+exports.watch = function () {
   watch(
-      ['*.html', '*.css', 'headers.js', 'images/**/*', '*.md'],
-      { ignoreInitial: false },
-      defaultTasks);
+    ['*.html', '*.css', 'headers.js', 'images/**/*', '*.md'],
+    { ignoreInitial: false },
+    defaultTasks);
 }
