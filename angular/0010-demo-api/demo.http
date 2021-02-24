@@ -8,6 +8,9 @@ GET {{host}}/people
 GET {{host}}/todos
 
 ###
+GET {{host}}/todos?q=GoT
+
+###
 // Add a todo item
 POST {{host}}/todos
 Content-Type: application/json

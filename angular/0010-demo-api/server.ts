@@ -1,5 +1,5 @@
 import * as cors from '@koa/cors'
-import {BAD_REQUEST, CREATED, NO_CONTENT, NOT_FOUND} from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import * as Koa from 'koa';
 import * as bodyParser from 'koa-bodyparser';
 import * as Router from 'koa-router';
@@ -28,14 +28,18 @@ router.get('/api/people', async (context) => {
 
 router.get('/api/todos', async (context) => {
   // Return todo items
-  context.body = todos;
+  if (context.query && context.query.q) {
+    context.body = todos.filter(t => t.description.indexOf(context.query.q.toString()) != -1);
+  } else {
+    context.body = todos;
+  }
 });
 
 router.get('/api/todos/:id', async (context) => {
   // Check if todo item exists
   const todoItem = todos.find(i => i.id == context.params.id);
   if (!todoItem) {
-    context.status = NOT_FOUND;
+    context.status = StatusCodes.NOT_FOUND;
   } else {
     context.body = todoItem;
   }
@@ -46,7 +50,7 @@ router.post('/api/todos', async (context) => {
 
   if (!body.description) {
     // description field is mandatory
-    context.status = BAD_REQUEST;
+    context.status = StatusCodes.BAD_REQUEST;
     context.body = {description: 'Missing description'};
     return;
   }
@@ -58,7 +62,7 @@ router.post('/api/todos', async (context) => {
     if (people.find(p => p.name === body.assignedTo)) {
       newItem.assignedTo = body.assignedTo;
     } else {
-      context.status = NOT_FOUND;
+      context.status = StatusCodes.NOT_FOUND;
       context.body = {description: 'Unknown person'};
       return;
     }
@@ -67,7 +71,7 @@ router.post('/api/todos', async (context) => {
   todos.push(newItem);
 
   context.set('location', `/api/todos/${newItem.id}`);
-  context.status = CREATED;
+  context.status = StatusCodes.CREATED;
   context.body = newItem;
 });
 
@@ -75,7 +79,7 @@ router.patch('/api/todos/:id', async (context) => {
   // Check if todo item exists
   const todoItem = todos.find(i => i.id == context.params.id);
   if (!todoItem) {
-    context.status = NOT_FOUND;
+    context.status = StatusCodes.NOT_FOUND;
     return;
   }
 
@@ -97,7 +101,7 @@ router.patch('/api/todos/:id', async (context) => {
     if (people.find(p => p.name === body.assignedTo)) {
       todoItem.assignedTo = body.assignedTo;
     } else {
-      context.status = NOT_FOUND;
+      context.status = StatusCodes.NOT_FOUND;
       context.body = {description: 'Unknown person'};
       return;
     }
@@ -110,13 +114,13 @@ router.delete('/api/todos/:id', async (context) => {
   // Check if todo item exists
   const todoItemIndex = todos.findIndex(i => i.id == context.params.id);
   if (todoItemIndex === (-1)) {
-    context.status = NOT_FOUND;
+    context.status = StatusCodes.NOT_FOUND;
     return;
   }
 
   todos.splice(todoItemIndex, 1);
 
-  context.status = NO_CONTENT;
+  context.status = StatusCodes.NO_CONTENT;
 });
 
 const app = new Koa();
