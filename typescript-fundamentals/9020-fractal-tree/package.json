@@ -17,7 +17,7 @@
     "@types/snapsvg": "^0.5.0",
     "@types/tinycolor2": "^1.4.2",
     "browser-sync": "^2.26.7",
-    "concurrently": "^5.2.0",
-    "typescript": "^3.8.3"
+    "concurrently": "^6.2.0",
+    "typescript": "^4.3.2"
   }
 }
