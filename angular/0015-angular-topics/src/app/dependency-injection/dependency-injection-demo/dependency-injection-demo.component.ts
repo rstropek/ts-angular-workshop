@@ -15,7 +15,7 @@ import { LoggerService } from '../logger.service';
   ]
 })
 export class DependencyInjectionDemoComponent {
-  public runtimeSender: MailBuilderService;
+  public runtimeSender?: MailBuilderService;
 
   constructor(public sender: MailBuilderService) {
     // Note that component receives mail sender object in constructor

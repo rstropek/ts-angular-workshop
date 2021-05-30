@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable, Directive } from '@angular/core';
-import { ValidatorFn, AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
+import { ValidatorFn, AbstractControl, NG_VALIDATORS, Validator, ValidationErrors } from '@angular/forms';
 
 class Customer {
     constructor(
@@ -12,7 +12,7 @@ class Customer {
 
 // Custom validation directives
 export function validateRevenue(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
+    return (control: AbstractControl): ValidationErrors | null => {
         // Revenue has to be > 100 or empty.
         if (!control.value || parseFloat(control.value) > 100) {
 
@@ -30,7 +30,7 @@ export function validateRevenue(): ValidatorFn {
     providers: [{ provide: NG_VALIDATORS, useExisting: RevenueValidatorDirective, multi: true }]
 })
 export class RevenueValidatorDirective implements Validator {
-    validate(control: AbstractControl): { [key: string]: any } {
+    validate(control: AbstractControl): ValidationErrors | null {
         return validateRevenue()(control);
     }
 }

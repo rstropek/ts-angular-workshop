@@ -5,7 +5,7 @@ import { Pipe, PipeTransform, Component } from '@angular/core';
 })
 export class UpperLowercasePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: any, ...args: any[]): any {
     if (value) {
       const valueString = value.toString();
       return valueString.substring(0, 1).toUpperCase() + valueString.substring(1);
@@ -24,5 +24,5 @@ export class UpperLowercasePipe implements PipeTransform {
   `
 })
 export class CustomPipeDemoComponent {
-  public name: string;
+  public name: string = '';
 }

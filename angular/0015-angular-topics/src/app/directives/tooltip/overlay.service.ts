@@ -29,6 +29,6 @@ export class OverlayService {
   }
 
   detach() {
-    this.el.parentNode.removeChild(this.el);
+    this.el.parentNode?.removeChild(this.el);
   }
 }

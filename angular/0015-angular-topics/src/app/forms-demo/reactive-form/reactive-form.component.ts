@@ -8,7 +8,7 @@ import { validateRevenue } from '../template-driven-form/template-driven-form.co
   styleUrls: ['./reactive-form.component.css']
 })
 export class ReactiveFormComponent implements OnInit {
-  public customerForm: FormGroup;
+  public customerForm!: FormGroup;
   public customerTypes = ['Unknown', 'Business', 'Commercial'];
 
   constructor(private formBuilder: FormBuilder) { }

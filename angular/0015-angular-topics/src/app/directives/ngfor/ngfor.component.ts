@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NgForComponent {
   public list: string[] = [];
-  public textToAdd: string;
+  public textToAdd: string = '';
 
   constructor() {
       this.list.push('Hello');

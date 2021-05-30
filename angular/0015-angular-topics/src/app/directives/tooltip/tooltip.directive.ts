@@ -6,7 +6,7 @@ import { OverlayService } from './overlay.service';
 })
 export class TooltipDirective {
   // For details see https://angular.io/docs/ts/latest/api/core/index/Input-var.html
-  @Input('appTooltip') appRsTooltip: string;
+  @Input('appTooltip') appRsTooltip: string = '';
 
   constructor(private el: ElementRef, private overlay: OverlayService) {
     // el is an Angular wrapper (for details see
