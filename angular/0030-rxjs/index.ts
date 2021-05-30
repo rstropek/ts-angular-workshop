@@ -16,7 +16,7 @@ import { autoSearch } from './auto-search';
 
 // Creating observables with RxJS
 // creatingObservables();
-// domEvents();
+domEvents();
 
 // Pipelines
 // pipelines();
