@@ -35,15 +35,25 @@ ng serve
 
 
 <!-- .slide: class="left" -->
+## *ESLint*
+
+* Previous to Angular 12: *TSLint*
+* Since Angular 12, no default linter
+  * *ESLint* recommended
+* Recommendation: Add [*angular-eslint*](https://github.com/angular-eslint/angular-eslint) to your project
+
+
+<!-- .slide: class="left" -->
 ## Getting Started
 
 * [StackBlitz](https://stackblitz.com/)
-* Online *Visual Studio Code* IDE for Angular (and React)
+  * Online *Visual Studio Code* IDE for Angular (and much more)
+  * [Read details...](https://medium.com/@ericsimons/stackblitz-online-vs-code-ide-for-angular-react-7d09348497f4)
 * Consider for VSCode:
   * [*Nx Console* extension](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
   * [*Angular Essentials* extension](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials)
   * [*Live Share* extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)
-* [Read details...](https://medium.com/@ericsimons/stackblitz-online-vs-code-ide-for-angular-react-7d09348497f4)
+* Consider for Chrome: [*Angular DevTools*](https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh)
 
 
 <!-- .slide: class="left" -->
