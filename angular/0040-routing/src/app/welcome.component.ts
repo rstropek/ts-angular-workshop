@@ -9,7 +9,6 @@ import {Component, OnInit} from '@angular/core';
       <li><a routerLink="/customers/123">Details about customer 123</a></li>
     </ul>`
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
   constructor() {}
-  ngOnInit() {}
 }

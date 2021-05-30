@@ -13,7 +13,7 @@ import {map} from 'rxjs/operators';
   </ul>`
 })
 export class CustomerDetailsComponent implements OnInit {
-  public customerID: Observable<string>;
+  public customerID?: Observable<string>;
   constructor(private route: ActivatedRoute) { console.log('Created...'); }
-  ngOnInit() { this.customerID = this.route.paramMap.pipe(map(param => param.get('id'))); }
+  ngOnInit() { this.customerID = this.route.paramMap.pipe(map(param => param.get('id') ?? '')); }
 }

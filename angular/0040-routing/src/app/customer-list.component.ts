@@ -4,11 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-customer-list',
   template: '<h2>Customer List</h2>'
 })
-export class CustomerListComponent implements OnInit {
+export class CustomerListComponent {
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }
