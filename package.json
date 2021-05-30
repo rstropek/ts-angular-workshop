@@ -4,13 +4,13 @@
   "description": "Material for TypeScript and Angular Fundamentals Workshop",
   "main": "index.html",
   "devDependencies": {
-    "concurrently": "^6.0.0",
+    "concurrently": "^6.2.0",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-line-ending-corrector": "^1.0.3",
     "gulp-ssi": "^0.1.5",
-    "jquery": "^3.5.1",
-    "reveal.js": "^4.1.0",
+    "jquery": "^3.6.0",
+    "reveal.js": "^4.1.1",
     "serve": "^11.3.2"
   },
   "scripts": {
