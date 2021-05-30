@@ -8,6 +8,7 @@ export class OverlayService {
   constructor() {
     const el = document.createElement('div');
     el.className = 'tooltip';
+    el.hidden = true;
     this.el = el;
   }
 

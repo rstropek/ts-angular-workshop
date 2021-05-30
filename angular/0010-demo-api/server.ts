@@ -37,7 +37,7 @@ router.get('/api/todos', async (context) => {
 
 router.get('/api/todos/:id', async (context) => {
   // Check if todo item exists
-  const todoItem = todos.find(i => i.id == context.params.id);
+  const todoItem = todos.find(i => i.id === parseInt(context.params.id));
   if (!todoItem) {
     context.status = StatusCodes.NOT_FOUND;
   } else {
@@ -77,7 +77,7 @@ router.post('/api/todos', async (context) => {
 
 router.patch('/api/todos/:id', async (context) => {
   // Check if todo item exists
-  const todoItem = todos.find(i => i.id == context.params.id);
+  const todoItem = todos.find(i => i.id === parseInt(context.params.id));
   if (!todoItem) {
     context.status = StatusCodes.NOT_FOUND;
     return;
@@ -112,7 +112,7 @@ router.patch('/api/todos/:id', async (context) => {
 
 router.delete('/api/todos/:id', async (context) => {
   // Check if todo item exists
-  const todoItemIndex = todos.findIndex(i => i.id == context.params.id);
+  const todoItemIndex = todos.findIndex(i => i.id == parseInt(context.params.id));
   if (todoItemIndex === (-1)) {
     context.status = StatusCodes.NOT_FOUND;
     return;

@@ -5,11 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './forms-demo-home.component.html',
   styleUrls: ['./forms-demo-home.component.css']
 })
-export class FormsDemoHomeComponent implements OnInit {
+export class FormsDemoHomeComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

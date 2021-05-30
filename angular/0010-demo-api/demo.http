@@ -8,7 +8,7 @@ GET {{host}}/people
 GET {{host}}/todos
 
 ###
-GET {{host}}/todos?q=GoT
+GET {{host}}/todos?q=asdf
 
 ###
 // Add a todo item
@@ -16,7 +16,7 @@ POST {{host}}/todos
 Content-Type: application/json
 
 {
-  "description": "Watch GoT",
+  "description": "Reading",
   "assignedTo": "Eve"
 }
 
@@ -57,7 +57,7 @@ GET {{host}}/todos
 
 ###
 // Update todo item
-PATCH {{host}}/todos/0
+PATCH {{host}}/todos/7
 Content-Type: application/json
 
 {
