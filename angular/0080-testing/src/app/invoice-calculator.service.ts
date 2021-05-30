@@ -32,6 +32,6 @@ export class InvoiceCalculatorService {
 
   public CalculateInvoice(invoiceLines: InvoiceLine[]): Invoice {
     // REPLACE the next line with the necessary code
-    return undefined;
+    throw new Error('not implemented');
   }
 }

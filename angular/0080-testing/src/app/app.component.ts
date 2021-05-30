@@ -9,7 +9,7 @@ import { VatCategory } from './vat-categories.service';
 })
 export class AppComponent {
   invoiceLines: InvoiceLine[] = [];
-  invoice: Invoice;
+  //invoice: Invoice;
 
   product = '';
   priceInclusiveVat = 0;

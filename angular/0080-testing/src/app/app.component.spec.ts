@@ -49,7 +49,7 @@ describe('AppComponent', () => {
     const ne: HTMLElement = de.nativeElement;
     const app: AppComponent = de.componentInstance;
 
-    const addButton: HTMLButtonElement = ne.querySelector('#add-button');
+    const addButton: HTMLButtonElement = ne.querySelector('#add-button')!;
 
     fixture.detectChanges();
     expect(addButton.disabled).toBeTruthy();
@@ -73,19 +73,19 @@ describe('AppComponent', () => {
     let invoiceLines = ne.querySelectorAll<HTMLTableRowElement>('#invoice-lines');
     expect(invoiceLines.length).toBe(0);
 
-    const productInput: HTMLInputElement = ne.querySelector('#product-input');
+    const productInput: HTMLInputElement = ne.querySelector('#product-input')!;
     productInput.value = 'Pizza';
     productInput.dispatchEvent(new Event('input'));
-    const vatCategoryInput: HTMLSelectElement = ne.querySelector('#vat-category-input');
+    const vatCategoryInput: HTMLSelectElement = ne.querySelector('#vat-category-input')!;
     vatCategoryInput.value = 'Food';
     vatCategoryInput.dispatchEvent(new Event('input'));
-    const priceInclusiveVatInput: HTMLInputElement = ne.querySelector('#priceInclusiveVat-input');
+    const priceInclusiveVatInput: HTMLInputElement = ne.querySelector('#priceInclusiveVat-input')!;
     priceInclusiveVatInput.value = '6';
     priceInclusiveVatInput.dispatchEvent(new Event('input'));
 
     fixture.detectChanges();
 
-    const addButton: HTMLButtonElement = ne.querySelector('#add-button');
+    const addButton: HTMLButtonElement = ne.querySelector('#add-button')!;
     addButton.click();
 
     fixture.detectChanges();
@@ -111,9 +111,9 @@ describe('AppComponent', () => {
 
     fixture.detectChanges();
 
-    const totalPriceInclusiveVatInput: HTMLTableDataCellElement = ne.querySelector('#totalPriceInclusiveVat');
+    const totalPriceInclusiveVatInput: HTMLTableDataCellElement = ne.querySelector('#totalPriceInclusiveVat')!;
     expect(totalPriceInclusiveVatInput.textContent).toBe('84.00');
-    const totalPriceExclusiveVatInput: HTMLTableDataCellElement = ne.querySelector('#totalPriceExclusiveVat');
+    const totalPriceExclusiveVatInput: HTMLTableDataCellElement = ne.querySelector('#totalPriceExclusiveVat')!;
     expect(totalPriceExclusiveVatInput.textContent).toBe('42.00');
   });
 });

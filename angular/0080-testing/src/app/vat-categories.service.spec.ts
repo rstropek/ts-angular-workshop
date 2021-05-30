@@ -16,6 +16,6 @@ describe('VatCategoriesService', () => {
   it('should return NaN for unknown category', () => {
     const service = new VatCategoriesService();
 
-    expect(service.getVat(undefined)).toBeNaN();
+    expect(service.getVat(<any>undefined)).toBeNaN();
   });
 });

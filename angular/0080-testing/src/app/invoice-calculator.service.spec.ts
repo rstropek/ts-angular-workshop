@@ -3,7 +3,7 @@ import { VatCategory } from './vat-categories.service';
 
 describe('InvoiceCalculatorService', () => {
   it('should calculate price excl. VAT correctly', () => {
-    const service = new InvoiceCalculatorService(undefined);
+    const service = new InvoiceCalculatorService(<any>undefined);
     expect(service.CalculatePriceExclusiveVat(12, 20)).toBe(10);
   });
 
