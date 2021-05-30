@@ -87,9 +87,8 @@ import {Component, OnInit} from '@angular/core';
       <li><a routerLink="/customers/123">Details about customer 123</a></li>
     </ul>`
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
   constructor() {}
-  ngOnInit() {}
 }
 ```
 
@@ -113,9 +112,9 @@ import {map} from 'rxjs/operators';
   </ul>`
 })
 export class CustomerDetailsComponent implements OnInit {
-  public customerID: Observable<string>;
+  public customerID?: Observable<string>;
   constructor(private route: ActivatedRoute) { console.log('Created...'); }
-  ngOnInit() { this.customerID = this.route.paramMap.pipe(map(param => param.get('id'))); }
+  ngOnInit() { this.customerID = this.route.paramMap.pipe(map(param => param.get('id') ?? '')); }
 }
 ```
 
