@@ -1,3 +1,5 @@
+/* eslint-disable @angular-eslint/no-output-rename */
+/* eslint-disable @angular-eslint/no-input-rename */
 import { Directive, Component, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { Subscription, interval, concat } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -21,6 +23,7 @@ import { take } from 'rxjs/operators';
     </div>`,
     styles: ['button { margin-left: 5px; }']
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class SpeedupAngleChangerHostDirective {
   angle = 90;
 }
