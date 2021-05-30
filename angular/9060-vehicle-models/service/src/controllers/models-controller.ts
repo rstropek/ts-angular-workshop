@@ -18,7 +18,7 @@ export class ModelsController implements interfaces.Controller {
 
     let yearFilter: number;
     if (req.query.year) {
-      yearFilter = Number.parseInt(req.query.year);
+      yearFilter = Number.parseInt(req.query.year.toString());
       if (isNaN(yearFilter)) {
         res.sendStatus(400);
         return;
@@ -37,7 +37,7 @@ export class ModelsController implements interfaces.Controller {
 
     let offset: number;
     if (req.query.offset) {
-      offset = Number.parseInt(req.query.offset);
+      offset = Number.parseInt(req.query.offset.toString());
       if (isNaN(offset)) {
         res.sendStatus(400);
         return;
@@ -46,7 +46,7 @@ export class ModelsController implements interfaces.Controller {
 
     let fetch: number = 10;
     if (req.query.fetch) {
-      fetch = Number.parseInt(req.query.fetch);
+      fetch = Number.parseInt(req.query.fetch.toString());
       if (isNaN(fetch) || fetch > 100) {
         res.sendStatus(400);
         return;
