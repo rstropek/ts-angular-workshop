@@ -254,7 +254,6 @@ math.demoModuleWrapper();
 
 * Want to know more? Read/watch...
   * [Node.js built-in API](https://nodejs.org/api/)
-  * First two lessons of [*Einf&uuml;hrung in Node.js*](https://vimeo.com/thenativeweb) (German)
 * Hands-on Labs
   * [*Hello World* tutorial for VSCode + Node.js](https://code.visualstudio.com/docs/nodejs/nodejs-tutorial#_hello-world)
   * [*Caesar Cipher* exercise](https://github.com/rstropek/ts-angular-workshop/blob/master/node-fundamentals/9010-lab-caesar/readme.md)

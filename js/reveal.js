@@ -26,7 +26,7 @@ import {
 } from './utils/constants.js'
 
 // The reveal.js version
-export const VERSION = '4.1.1';
+export const VERSION = '4.1.3';
 
 /**
  * reveal.js
@@ -1251,7 +1251,10 @@ export default function( revealElement, options ) {
 			// Note 20-03-2020:
 			// This needs to happen before we update slide visibility,
 			// otherwise transitions will still run in Safari.
-			if( previousSlide.hasAttribute( 'data-auto-animate' ) && currentSlide.hasAttribute( 'data-auto-animate' ) ) {
+			if( previousSlide.hasAttribute( 'data-auto-animate' ) && currentSlide.hasAttribute( 'data-auto-animate' )
+					&& previousSlide.getAttribute( 'data-auto-animate-id' ) === currentSlide.getAttribute( 'data-auto-animate-id' )
+					&& !( ( indexh > indexhBefore || indexv > indexvBefore ) ? currentSlide : previousSlide ).hasAttribute( 'data-auto-animate-restart' ) ) {
+
 				autoAnimateTransition = true;
 				dom.slides.classList.add( 'disable-slide-transitions' );
 			}
