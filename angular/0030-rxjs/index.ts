@@ -8,6 +8,7 @@ import { pipelines } from './pipelines';
 import { combine } from './combining';
 import { flatMapping } from './mapping';
 import { autoSearch } from './auto-search';
+import { shareObservable } from './share';
 
 // The basics
 // manualObservable();
@@ -16,10 +17,11 @@ import { autoSearch } from './auto-search';
 
 // Creating observables with RxJS
 // creatingObservables();
-domEvents();
+// domEvents();
 
 // Pipelines
 // pipelines();
+shareObservable();
 
 // Combining observables
 // combine();
