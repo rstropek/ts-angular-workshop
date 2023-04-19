@@ -16,7 +16,7 @@ export class ConverterComponent {
 
   formGroup = new FormGroup({
     degreeCelsius: new FormControl(30),
-  })
+  });
   degreeFahrenheit = 0;
 
   convert() {

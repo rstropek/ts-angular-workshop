@@ -1,0 +1,13 @@
+<div class="rectangle" (mousemove)="onMouseMove($event)">
+  <p>Mouse Coordinates: X: {{ x }}, Y: {{ y }}</p>
+</div>
+<form [formGroup]="formGroup">
+  <label>
+    Distance (inch):
+    <input type="number" name="distanceInch" formControlName="distanceInch" />
+  </label>
+  <p>
+    Distance (m): {{ getDistanceMeters() }}<br/>
+    Distance (m): {{ formGroup.controls.distanceInch.value ?? 0 | inchToMeter }}
+  </p>
+</form>
