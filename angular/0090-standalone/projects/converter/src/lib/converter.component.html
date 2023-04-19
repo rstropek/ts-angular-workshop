@@ -1,0 +1,10 @@
+<form [formGroup]="formGroup">
+  <label>
+    Degree celsius:
+    <input type="number" name="degreeCelsius" formControlName="degreeCelsius" />
+  </label>
+  <button (click)="convert()">Convert</button>
+  <p>
+    Degree fahrenheit: {{ degreeFahrenheit }}
+  </p>
+</form>
