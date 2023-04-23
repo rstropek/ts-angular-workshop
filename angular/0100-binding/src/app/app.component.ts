@@ -13,6 +13,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     <header>
       <a routerLink="/func-pipes">Functions and Pipes</a>
       <a routerLink="/on-push">On Push</a>
+      <a routerLink="/reactive">Reactive</a>
     </header>
 
     <router-outlet></router-outlet>
