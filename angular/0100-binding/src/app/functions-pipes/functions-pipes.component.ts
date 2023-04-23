@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Pipe, PipeTransform } from '@angular/core';
+import { windowWithCounters } from '../binding-counters';
 
 @Pipe({
   standalone: true,
@@ -13,17 +14,6 @@ export class InchToMeterPipe implements PipeTransform {
     return value * 0.0254;
   }
 }
-
-interface WindowWithCounters {
-  set numberOfFunctionCalls(value: string);
-  get numberOfFunctionCalls();
-
-  set numberOfPipeCalls(value: string);
-  get numberOfPipeCalls();
-}
-// Note: Create a chrome live expression to monitor
-// numberOfFunctionCalls and numberOfPipeCalls.
-const windowWithCounters = window as unknown as WindowWithCounters;
 
 @Component({
   standalone: true,
